@@ -37,6 +37,7 @@
         <artifactId>jcabi</artifactId>
         <version>1.21</version>
     </parent>
+    <groupId>com.thesocialstation</groupId>
     <artifactId>jcabi-http</artifactId>
     <version>1.14.2</version>
     <packaging>jar</packaging>
@@ -56,11 +57,15 @@
         <url>https://github.com/jcabi/jcabi-http</url>
     </scm>
     <distributionManagement>
-        <site>
-            <id>http.jcabi.com</id>
-            <url>http://http.jcabi.com/</url>
-        </site>
+        <repository>
+            <id>internal.repo</id>
+            <name>Temporary Staging Repository</name>
+            <url>file://${project.build.directory}/mvn-repo</url>
+        </repository>
     </distributionManagement>
+    <properties>
+        <github.global.server>github</github.global.server>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.jcabi</groupId>
@@ -256,6 +261,29 @@
                             <goal>integration-test</goal>
                             <goal>verify</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.11</version>
+                <configuration>
+                    <message>Maven artifacts for ${project.version}</message>  <!-- git commit message -->
+                    <noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
+                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
+                    <branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
+                    <includes><include>**/*</include></includes>
+                    <repositoryName>jcabi-http</repositoryName>      <!-- github repo name -->
+                    <repositoryOwner>thesocialstation</repositoryOwner>    <!-- github username  -->
+                </configuration>
+                <executions>
+                    <!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>deploy</phase>
                     </execution>
                 </executions>
             </plugin>
