@@ -347,22 +347,22 @@
     </plugins>
   </build>
   <profiles>
-    <profile>
-      <id>qulice</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>com.qulice</groupId>
-            <artifactId>qulice-maven-plugin</artifactId>
-            <configuration>
-              <excludes combine.children="append">
-                <exclude>duplicatefinder:.*</exclude>
-              </excludes>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
+<!--    <profile>-->
+<!--      <id>qulice</id>-->
+<!--      <build>-->
+<!--        <plugins>-->
+<!--          <plugin>-->
+<!--            <groupId>com.qulice</groupId>-->
+<!--            <artifactId>qulice-maven-plugin</artifactId>-->
+<!--            <configuration>-->
+<!--              <excludes combine.children="append">-->
+<!--                <exclude>duplicatefinder:.*</exclude>-->
+<!--              </excludes>-->
+<!--            </configuration>-->
+<!--          </plugin>-->
+<!--        </plugins>-->
+<!--      </build>-->
+<!--    </profile>-->
     <profile>
       <id>coveralls</id>
       <activation>
