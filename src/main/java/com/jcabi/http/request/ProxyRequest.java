@@ -259,7 +259,12 @@ public final class ProxyRequest implements Request {
 		return this.base.body();
 	}
 
-	@Override
+    @Override
+    public RequestBody multipartBody() {
+        return this.base.multipartBody();
+    }
+
+    @Override
 	public Request method(final String method) {
 		return this.base.method(method);
 	}
@@ -285,4 +290,8 @@ public final class ProxyRequest implements Request {
 		return this.base.through(type, args);
 	}
 
+    @Override
+    public Request through(final Wire wire) {
+        return this.base.through(wire);
+    }
 }
